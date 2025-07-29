@@ -312,3 +312,29 @@ The dashboard is fully responsive with breakpoints:
 - **Tablet**: 640px - 1024px - Hybrid layout with collapsible sidebar
 - **Desktop**: > 1024px - Full layout with all features visible
 
+## 🚀 Deployment
+
+### Quick Deploy to Netlify
+
+1. **Build the project:**
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy options:**
+   - **Drag & Drop**: Upload the `out` folder to [Netlify](https://netlify.com)
+   - **GitHub Integration**: Connect your repository for automatic deployments
+   - **Netlify CLI**: Use `netlify deploy --prod --dir=out`
+
+3. **Configuration:**
+   - Build command: `npm run build`
+   - Publish directory: `out`
+   - Node version: `18`
+
+For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
+
+### Alternative Deployments
+- **Vercel**: `vercel --prod`
+- **GitHub Pages**: Configure for static deployment
+- **Any Static Host**: Use the `out` folder contents
+
