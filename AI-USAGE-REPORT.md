@@ -1,7 +1,7 @@
 # AI Usage Report - ADmyBRAND Insights Analytics Dashboard
 
 ## AI Tools Used
-- **Primary tools**: GitHub Copilot, VS Code AI Assistant, Claude AI
+- **Primary tools**: GitHub Copilot, ChatGPT, Claude AI, Qwen
 - **Key use cases**: Component architecture design, TypeScript interface generation, responsive layout implementation, chart component development, data table creation with TanStack React Table, mock data generation, and debugging assistance
 
 ## Sample Prompts (2-3 examples)
