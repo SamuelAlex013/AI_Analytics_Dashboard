@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { useAnalytics } from "@/hooks/use-analytics"
 import { StatCard } from "@/components/cards/stat-card"
 import { AnalyticsLineChart } from "@/components/charts/line-chart"
@@ -12,16 +12,14 @@ import { UserData } from "@/types/analytics"
 import { formatCurrency, formatDate } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { 
   ArrowUpDown, 
   RefreshCw, 
-  Download, 
   Filter, 
-  CalendarIcon, 
   Play, 
   Pause, 
   FileText, 
@@ -39,7 +37,6 @@ import {
   Zap,
   TrendingUp
 } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const userColumns: ColumnDef<UserData>[] = [
   {
@@ -159,12 +156,15 @@ export default function OverviewPage() {
   const [isDashboardVisible, setIsDashboardVisible] = useState(true)
   const [autoRefreshInterval, setAutoRefreshInterval] = useState("10s")
   
-  // Use analytics hook with filters
-  const { data, loading, error, refetch } = useAnalytics({
+  // Memoize filters to prevent infinite re-renders
+  const filters = useMemo(() => ({
     dateRange,
     statusFilter,
     searchQuery
-  })
+  }), [dateRange, statusFilter, searchQuery])
+  
+  // Use analytics hook with memoized filters
+  const { data, loading, error, refetch } = useAnalytics(filters)
   
   // Real-time updates effect with more realistic intervals
   useEffect(() => {
@@ -249,7 +249,7 @@ export default function OverviewPage() {
           return matchesSearch && matchesStatus
         })
         
-        filteredUsers.slice(0, 25).forEach((user, index) => {
+        filteredUsers.slice(0, 25).forEach((user) => {
           if (yPosition > 250) { // Add new page if needed
             pdf.addPage()
             yPosition = 30

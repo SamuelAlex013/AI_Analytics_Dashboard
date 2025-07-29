@@ -148,7 +148,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <CardDescription>
-                  "ADmyBRAND Insights transformed how we track campaign performance. The real-time analytics helped us increase ROI by 40%."
+                  &ldquo;ADmyBRAND Insights transformed how we track campaign performance. The real-time analytics helped us increase ROI by 40%.&rdquo;
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -172,7 +172,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <CardDescription>
-                  "The intuitive dashboard and detailed reporting saved us countless hours. We can now focus on strategy instead of data collection."
+                  &ldquo;The intuitive dashboard and detailed reporting saved us countless hours. We can now focus on strategy instead of data collection.&rdquo;
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -196,7 +196,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <CardDescription>
-                  "Best analytics platform we've used. The AI-powered insights helped us optimize our clients' campaigns like never before."
+                  &ldquo;Best analytics platform we&apos;ve used. The AI-powered insights helped us optimize our clients&apos; campaigns like never before.&rdquo;
                 </CardDescription>
               </CardHeader>
               <CardContent>

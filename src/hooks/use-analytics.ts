@@ -34,24 +34,25 @@ export function useAnalytics(filters?: AnalyticsFilters) {
       const analyticsData = await response.json()
       
       // Add some realistic variance for live updates
-      if (data) {
-        analyticsData.metrics.revenue.value = Math.round(analyticsData.metrics.revenue.value * (0.98 + Math.random() * 0.04))
-        analyticsData.metrics.users.value = Math.round(analyticsData.metrics.users.value * (0.99 + Math.random() * 0.02))
-        analyticsData.metrics.conversions.change = Number((analyticsData.metrics.conversions.change + (Math.random() - 0.5) * 0.5).toFixed(1))
-        analyticsData.metrics.growth.change = Number((parseFloat(analyticsData.metrics.growth.change) + (Math.random() - 0.5) * 0.3).toFixed(1))
-      }
-      
-      setData(analyticsData)
+      setData(prevData => {
+        if (prevData) {
+          analyticsData.metrics.revenue.value = Math.round(analyticsData.metrics.revenue.value * (0.98 + Math.random() * 0.04))
+          analyticsData.metrics.users.value = Math.round(analyticsData.metrics.users.value * (0.99 + Math.random() * 0.02))
+          analyticsData.metrics.conversions.change = Number((analyticsData.metrics.conversions.change + (Math.random() - 0.5) * 0.5).toFixed(1))
+          analyticsData.metrics.growth.change = Number((parseFloat(analyticsData.metrics.growth.change) + (Math.random() - 0.5) * 0.3).toFixed(1))
+        }
+        return analyticsData
+      })
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {
       setLoading(false)
     }
-  }, [filters, data])
+  }, [filters])
 
   useEffect(() => {
     fetchAnalytics()
-  }, [filters?.dateRange, filters?.statusFilter]) // Re-fetch when filters change
+  }, [filters?.dateRange, filters?.statusFilter, filters?.searchQuery]) // Only depend on the actual filter values
 
   const refetch = async () => {
     await fetchAnalytics()

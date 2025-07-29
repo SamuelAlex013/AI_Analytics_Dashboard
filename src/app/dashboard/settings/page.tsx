@@ -22,7 +22,6 @@ import {
   FileText,
   Table,
   FileJson,
-  Calendar,
   Users,
   TrendingUp,
   ChevronDown,
@@ -116,8 +115,8 @@ export default function SettingsPage() {
         // Generate CSV
         const csvHeaders = "Date,Revenue,Users,Conversions\n"
         const revenueData = data.charts.revenue.data
-        const csvData = revenueData.map((item: any) => 
-          `${item.name},${item.value},${data.charts.users.data.find((u: any) => u.name === item.name)?.value || 0},${data.charts.conversions.data.find((c: any) => c.name === item.name)?.value || 0}`
+        const csvData = revenueData.map((item: { name: string; value: number }) => 
+          `${item.name},${item.value},${data.charts.users.data.find((u: { name: string; value: number }) => u.name === item.name)?.value || 0},${data.charts.conversions.data.find((c: { name: string; value: number }) => c.name === item.name)?.value || 0}`
         ).join('\n')
         
         const csvContent = csvHeaders + csvData
@@ -200,7 +199,7 @@ export default function SettingsPage() {
         doc.text('Conversions', 180, yPos)
         
         // Data rows
-        data.charts.revenue.data.slice(0, 20).forEach((item: any, index: number) => {
+        data.charts.revenue.data.slice(0, 20).forEach((item: { name: string; value: number }, index: number) => {
           yPos += 10
           if (yPos > 270) {
             doc.addPage()
