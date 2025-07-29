@@ -443,22 +443,22 @@ Status Filter: ${statusFilter}
     <div className="space-y-6">
       {/* Enhanced Header with Real-time Controls */}
       <div className="flex flex-col space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex-1">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
                 Dashboard Overview
                 {isBookmarked && (
-                  <BookmarkCheck className="h-6 w-6 text-yellow-500" />
+                  <BookmarkCheck className="h-5 w-5 sm:h-6 sm:w-6 text-yellow-500" />
                 )}
               </h1>
-              <p className="text-muted-foreground">
+              <p className="text-sm sm:text-base text-muted-foreground">
                 Welcome to ADmyBRAND Insights - Your AI-powered analytics dashboard
               </p>
             </div>
             
             {/* Performance Indicator */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-950 rounded-full">
+            <div className="hidden xl:flex items-center gap-2 px-3 py-1 bg-green-50 dark:bg-green-950 rounded-full">
               <TrendingUp className="h-4 w-4 text-green-600" />
               <span className="text-sm font-medium text-green-700 dark:text-green-300">
                 Performance: +12.5%
@@ -467,7 +467,7 @@ Status Filter: ${statusFilter}
           </div>
 
           {/* Enhanced Control Panel */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
             {/* Notification Bell */}
             <div className="relative">
               <Button
@@ -476,9 +476,9 @@ Status Filter: ${statusFilter}
                 size="sm"
                 className="transition-all duration-200 hover:scale-105"
               >
-                <Bell className="h-4 w-4" />
+                <Bell className="h-3 w-3 sm:h-4 sm:w-4" />
                 {notificationCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-3 w-3 sm:h-4 sm:w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                     {notificationCount}
                   </span>
                 )}
@@ -486,17 +486,17 @@ Status Filter: ${statusFilter}
               
               {/* Notification Dropdown */}
               {showNotifications && (
-                <div className="absolute right-0 top-full mt-2 w-80 bg-background border rounded-lg shadow-lg z-50 animate-in slide-in-from-top-2 duration-200">
-                  <div className="p-4">
-                    <h3 className="font-semibold mb-2">Recent Notifications</h3>
+                <div className="absolute right-0 top-full mt-2 w-72 sm:w-80 bg-background border rounded-lg shadow-lg z-50 animate-in slide-in-from-top-2 duration-200">
+                  <div className="p-3 sm:p-4">
+                    <h3 className="font-semibold mb-2 text-sm sm:text-base">Recent Notifications</h3>
                     <div className="space-y-2">
-                      <div className="text-sm p-2 bg-muted rounded">
+                      <div className="text-xs sm:text-sm p-2 bg-muted rounded">
                         <span className="font-medium">Revenue Alert:</span> Daily target exceeded by 15%
                       </div>
-                      <div className="text-sm p-2 bg-muted rounded">
+                      <div className="text-xs sm:text-sm p-2 bg-muted rounded">
                         <span className="font-medium">User Growth:</span> 25 new signups today
                       </div>
-                      <div className="text-sm p-2 bg-muted rounded">
+                      <div className="text-xs sm:text-sm p-2 bg-muted rounded">
                         <span className="font-medium">System:</span> Data refresh completed
                       </div>
                     </div>
@@ -506,12 +506,12 @@ Status Filter: ${statusFilter}
             </div>
 
             {/* Auto Refresh Interval Selector */}
-            <div className="hidden md:flex items-center gap-1">
+            <div className="hidden sm:flex items-center gap-1">
               <Zap className="h-3 w-3 text-muted-foreground" />
               <select
                 value={autoRefreshInterval}
                 onChange={(e) => changeRefreshInterval(e.target.value)}
-                className="text-xs border rounded px-2 py-1 bg-background"
+                className="text-xs border rounded px-1 sm:px-2 py-1 bg-background"
               >
                 <option value="5s">5s</option>
                 <option value="10s">10s</option>
@@ -519,6 +519,18 @@ Status Filter: ${statusFilter}
                 <option value="1m">1m</option>
                 <option value="off">Off</option>
               </select>
+            </div>
+
+            {/* Mobile-only Auto Refresh Button */}
+            <div className="sm:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="transition-all duration-200 hover:scale-105"
+                title={`Refresh rate: ${autoRefreshInterval}`}
+              >
+                <Zap className="h-3 w-3" />
+              </Button>
             </div>
 
             {/* Visibility Toggle */}
@@ -530,9 +542,9 @@ Status Filter: ${statusFilter}
               title="Toggle dashboard visibility"
             >
               {isDashboardVisible ? (
-                <Eye className="h-4 w-4" />
+                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
               ) : (
-                <EyeOff className="h-4 w-4" />
+                <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" />
               )}
             </Button>
 
@@ -545,9 +557,9 @@ Status Filter: ${statusFilter}
               title="Bookmark dashboard"
             >
               {isBookmarked ? (
-                <BookmarkCheck className="h-4 w-4 text-yellow-500" />
+                <BookmarkCheck className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500" />
               ) : (
-                <Bookmark className="h-4 w-4" />
+                <Bookmark className="h-3 w-3 sm:h-4 sm:w-4" />
               )}
             </Button>
 
@@ -559,15 +571,15 @@ Status Filter: ${statusFilter}
               className="transition-all duration-200 hover:scale-105"
               title="Share dashboard"
             >
-              <Share2 className="h-4 w-4" />
+              <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
 
-            {/* Fullscreen Toggle */}
+            {/* Fullscreen Toggle - Hidden on mobile */}
             <Button
               onClick={handleFullscreen}
               variant="ghost"
               size="sm"
-              className="transition-all duration-200 hover:scale-105"
+              className="hidden sm:flex transition-all duration-200 hover:scale-105"
               title="Toggle fullscreen"
             >
               {isFullscreen ? (
@@ -584,59 +596,61 @@ Status Filter: ${statusFilter}
               className="transition-all duration-200 hover:scale-105"
               title="Dashboard settings"
             >
-              <Settings className="h-4 w-4" />
+              <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
 
-            <Separator orientation="vertical" className="h-6" />
+            <Separator orientation="vertical" className="h-4 sm:h-6" />
 
             {/* Real-time Toggle */}
             <Button
               onClick={() => setIsRealTimeEnabled(!isRealTimeEnabled)}
               variant={isRealTimeEnabled ? "default" : "outline"}
               size="sm"
-              className="transition-all duration-200"
+              className="transition-all duration-200 text-xs sm:text-sm"
             >
               {isRealTimeEnabled ? (
                 <>
-                  <Pause className="mr-2 h-4 w-4" />
-                  Live ({autoRefreshInterval})
+                  <Pause className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Live ({autoRefreshInterval})</span>
+                  <span className="sm:hidden">Live</span>
                 </>
               ) : (
                 <>
-                  <Play className="mr-2 h-4 w-4" />
-                  Enable Live
+                  <Play className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <span className="hidden sm:inline">Enable Live</span>
+                  <span className="sm:hidden">Live</span>
                 </>
               )}
             </Button>
 
             {/* Manual Refresh */}
-            <Button onClick={refetch} variant="outline" size="sm">
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Refresh
+            <Button onClick={refetch} variant="outline" size="sm" className="text-xs sm:text-sm">
+              <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Refresh</span>
             </Button>
           </div>
         </div>
 
         {/* Enhanced Real-time Status and Last Update */}
         {isRealTimeEnabled && (
-          <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
-            <div className="flex items-center gap-4 text-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800 gap-2 sm:gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="font-medium text-green-700 dark:text-green-300">Live updates enabled</span>
               </div>
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="hidden sm:block h-4" />
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Clock className="h-3 w-3" />
-                <span>Last updated: {lastUpdate.toLocaleTimeString()}</span>
+                <span className="text-xs sm:text-sm">Last updated: {lastUpdate.toLocaleTimeString()}</span>
               </div>
-              <Separator orientation="vertical" className="h-4" />
+              <Separator orientation="vertical" className="hidden md:block h-4" />
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Zap className="h-3 w-3" />
-                <span>Refresh rate: {autoRefreshInterval}</span>
+                <span className="text-xs sm:text-sm">Refresh rate: {autoRefreshInterval}</span>
               </div>
             </div>
-            <div className="hidden sm:flex items-center gap-2 text-xs text-green-600 dark:text-green-400">
+            <div className="hidden lg:flex items-center gap-2 text-xs text-green-600 dark:text-green-400">
               <TrendingUp className="h-3 w-3" />
               <span>Real-time data streaming</span>
             </div>
@@ -644,22 +658,22 @@ Status Filter: ${statusFilter}
         )}
 
         {/* Filters and Export Controls */}
-        <Card className="p-4">
-          <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+        <Card className="p-3 sm:p-4">
+          <div className="flex flex-col gap-4 items-start">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center w-full">
               <div className="flex items-center gap-2">
                 <Filter className="h-4 w-4 text-muted-foreground" />
                 <Label className="text-sm font-medium">Filters:</Label>
               </div>
               
-              <div className="flex flex-wrap gap-2">
-                <div className="flex items-center gap-2">
-                  <Label htmlFor="date-range" className="text-xs text-muted-foreground">Date Range:</Label>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <Label htmlFor="date-range" className="text-xs text-muted-foreground whitespace-nowrap">Date Range:</Label>
                   <select
                     id="date-range"
                     value={dateRange}
                     onChange={(e) => setDateRange(e.target.value)}
-                    className="text-sm border rounded px-2 py-1 bg-background"
+                    className="text-sm border rounded px-2 py-1 bg-background min-w-0 flex-1 sm:flex-initial"
                   >
                     <option value="1d">Last 24 hours</option>
                     <option value="7d">Last 7 days</option>
@@ -669,13 +683,13 @@ Status Filter: ${statusFilter}
                   </select>
                 </div>
                 
-                <div className="flex items-center gap-2">
-                  <Label htmlFor="status-filter" className="text-xs text-muted-foreground">Status:</Label>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                  <Label htmlFor="status-filter" className="text-xs text-muted-foreground whitespace-nowrap">Status:</Label>
                   <select
                     id="status-filter"
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="text-sm border rounded px-2 py-1 bg-background"
+                    className="text-sm border rounded px-2 py-1 bg-background min-w-0 flex-1 sm:flex-initial"
                   >
                     <option value="all">All Status</option>
                     <option value="active">Active</option>
@@ -688,18 +702,18 @@ Status Filter: ${statusFilter}
                   placeholder="Search users..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 h-8 text-sm"
+                  className="w-full sm:w-48 h-8 text-sm"
                 />
               </div>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
               <Button
                 onClick={exportToPDF}
                 disabled={isExporting === "pdf"}
                 variant="outline"
                 size="sm"
-                className="transition-all duration-200 hover:scale-105"
+                className="transition-all duration-200 hover:scale-105 w-full sm:w-auto"
               >
                 {isExporting === "pdf" ? (
                   <>
@@ -718,7 +732,7 @@ Status Filter: ${statusFilter}
                 disabled={isExporting === "csv"}
                 variant="outline"
                 size="sm"
-                className="transition-all duration-200 hover:scale-105"
+                className="transition-all duration-200 hover:scale-105 w-full sm:w-auto"
               >
                 {isExporting === "csv" ? (
                   <>
@@ -845,9 +859,9 @@ Status Filter: ${statusFilter}
       <div className="grid gap-6 md:grid-cols-3">
         <div className="md:col-span-1 relative">
           {isRealTimeEnabled && (
-            <div className="absolute top-4 right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
               <div className="h-1.5 w-1.5 bg-green-500 rounded-full animate-pulse"></div>
-              Live
+              <span className="hidden sm:inline">Live</span>
             </div>
           )}
           <div className="transition-all duration-300 hover:shadow-lg">
@@ -862,9 +876,9 @@ Status Filter: ${statusFilter}
         </div>
         <div className="md:col-span-2 relative">
           {isRealTimeEnabled && (
-            <div className="absolute top-4 right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
               <div className="h-1.5 w-1.5 bg-green-500 rounded-full animate-pulse"></div>
-              Live
+              <span className="hidden sm:inline">Live</span>
             </div>
           )}
           <div className="transition-all duration-300 hover:shadow-lg">
@@ -887,31 +901,31 @@ Status Filter: ${statusFilter}
         </div>
 
         {/* Additional Analytics Row - Bottom Section */}
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {/* Quick Stats Card */}
           <Card className="transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-sm sm:text-base flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-green-600" />
                 Performance
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2 sm:space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Conversion Rate</span>
-                <span className="font-semibold text-green-600">+2.5%</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">Conversion Rate</span>
+                <span className="text-sm font-semibold text-green-600">+2.5%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Avg. Session</span>
-                <span className="font-semibold">4m 32s</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">Avg. Session</span>
+                <span className="text-sm font-semibold">4m 32s</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Bounce Rate</span>
-                <span className="font-semibold text-red-600">-1.2%</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">Bounce Rate</span>
+                <span className="text-sm font-semibold text-red-600">-1.2%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Page Views</span>
-                <span className="font-semibold">12,847</span>
+                <span className="text-xs sm:text-sm text-muted-foreground">Page Views</span>
+                <span className="text-sm font-semibold">12,847</span>
               </div>
             </CardContent>
           </Card>
@@ -919,40 +933,40 @@ Status Filter: ${statusFilter}
           {/* Top Channels */}
           <Card className="transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-sm sm:text-base flex items-center gap-2">
                 <Share2 className="h-4 w-4 text-blue-600" />
                 Top Channels
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="space-y-2 sm:space-y-3">
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-sm">Organic Search</span>
+                    <span className="text-xs sm:text-sm">Organic Search</span>
                   </div>
-                  <span className="text-sm font-medium">45.2%</span>
+                  <span className="text-xs sm:text-sm font-medium">45.2%</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm">Direct Traffic</span>
+                    <span className="text-xs sm:text-sm">Direct Traffic</span>
                   </div>
-                  <span className="text-sm font-medium">23.8%</span>
+                  <span className="text-xs sm:text-sm font-medium">23.8%</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                    <span className="text-sm">Social Media</span>
+                    <span className="text-xs sm:text-sm">Social Media</span>
                   </div>
-                  <span className="text-sm font-medium">18.4%</span>
+                  <span className="text-xs sm:text-sm font-medium">18.4%</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                    <span className="text-sm">Email Campaign</span>
+                    <span className="text-xs sm:text-sm">Email Campaign</span>
                   </div>
-                  <span className="text-sm font-medium">12.6%</span>
+                  <span className="text-xs sm:text-sm font-medium">12.6%</span>
                 </div>
               </div>
             </CardContent>
@@ -961,36 +975,36 @@ Status Filter: ${statusFilter}
           {/* Recent Activity */}
           <Card className="transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-sm sm:text-base flex items-center gap-2">
                 <Clock className="h-4 w-4 text-indigo-600" />
                 Recent Activity
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="space-y-3 text-sm">
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+            <CardContent className="space-y-2 sm:space-y-3">
+              <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <div className="flex-1">
                     <p className="font-medium">New user registered</p>
                     <p className="text-xs text-muted-foreground">2 minutes ago</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <div className="flex-1">
                     <p className="font-medium">Campaign launched</p>
                     <p className="text-xs text-muted-foreground">15 minutes ago</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <div className="flex-1">
                     <p className="font-medium">Report generated</p>
                     <p className="text-xs text-muted-foreground">1 hour ago</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full mt-1.5 sm:mt-2 flex-shrink-0"></div>
                   <div className="flex-1">
                     <p className="font-medium">Data sync completed</p>
                     <p className="text-xs text-muted-foreground">2 hours ago</p>
@@ -1003,41 +1017,41 @@ Status Filter: ${statusFilter}
           {/* System Status */}
           <Card className="transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
             <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
+              <CardTitle className="text-sm sm:text-base flex items-center gap-2">
                 <Zap className="h-4 w-4 text-yellow-600" />
                 System Status
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="space-y-3">
+            <CardContent className="space-y-2 sm:space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">API Status</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">API Status</span>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-green-600">Online</span>
+                    <span className="text-xs sm:text-sm font-medium text-green-600">Online</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Database</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">Database</span>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-green-600">Healthy</span>
+                    <span className="text-xs sm:text-sm font-medium text-green-600">Healthy</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">CDN</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">CDN</span>
                   <div className="flex items-center gap-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-green-600">Fast</span>
+                    <span className="text-xs sm:text-sm font-medium text-green-600">Fast</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Uptime</span>
-                  <span className="text-sm font-medium">99.9%</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">Uptime</span>
+                  <span className="text-xs sm:text-sm font-medium">99.9%</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Response Time</span>
-                  <span className="text-sm font-medium">142ms</span>
+                  <span className="text-xs sm:text-sm text-muted-foreground">Response Time</span>
+                  <span className="text-xs sm:text-sm font-medium">142ms</span>
                 </div>
               </div>
             </CardContent>

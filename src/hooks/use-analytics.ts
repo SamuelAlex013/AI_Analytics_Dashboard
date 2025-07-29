@@ -51,7 +51,7 @@ export function useAnalytics(filters?: AnalyticsFilters) {
 
   useEffect(() => {
     fetchAnalytics()
-  }, [filters?.dateRange, filters?.statusFilter, filters?.searchQuery]) // Only depend on the actual filter values
+  }, [fetchAnalytics]) // fetchAnalytics is memoized with useCallback, so this is safe
 
   const refetch = async () => {
     await fetchAnalytics()

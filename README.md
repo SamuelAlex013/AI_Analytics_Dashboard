@@ -331,10 +331,6 @@ The dashboard is fully responsive with breakpoints:
    - Publish directory: `out`
    - Node version: `18`
 
-For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)
 
-### Alternative Deployments
-- **Vercel**: `vercel --prod`
-- **GitHub Pages**: Configure for static deployment
-- **Any Static Host**: Use the `out` folder contents
+
 
