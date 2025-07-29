@@ -103,7 +103,7 @@ export function DataTable<TData, TValue>({
         </CardHeader>
       )}
       <CardContent>
-        <div className="flex items-center py-4 gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center py-4 gap-2 sm:gap-4">
           {searchKey && (
             <Input
               placeholder={searchPlaceholder}
@@ -111,12 +111,12 @@ export function DataTable<TData, TValue>({
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 table.getColumn(searchKey)?.setFilterValue(event.target.value)
               }
-              className="max-w-sm"
+              className="w-full sm:max-w-sm"
             />
           )}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
+              <Button variant="outline" className="w-full sm:w-auto sm:ml-auto">
                 Columns <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -141,12 +141,13 @@ export function DataTable<TData, TValue>({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
+        <div className="rounded-md border overflow-hidden">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
                     return (
                       <TableHead key={header.id}>
                         {header.isPlaceholder
@@ -202,9 +203,10 @@ export function DataTable<TData, TValue>({
               )}
             </TableBody>
           </Table>
+          </div>
         </div>
-        <div className="flex items-center justify-between space-x-2 py-4">
-          <div className="flex items-center space-x-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0 sm:space-x-2 py-4">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2">
             <p className="text-sm font-medium">Rows per page</p>
             <Select
               value={`${table.getState().pagination.pageSize}`}
@@ -225,8 +227,8 @@ export function DataTable<TData, TValue>({
             </Select>
           </div>
           
-          <div className="flex items-center space-x-6 lg:space-x-8">
-            <div className="flex w-[100px] items-center justify-center text-sm font-medium">
+          <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6 lg:space-x-8">
+            <div className="flex items-center justify-center text-sm font-medium">
               Page {table.getState().pagination.pageIndex + 1} of{" "}
               {table.getPageCount()}
             </div>
@@ -234,7 +236,7 @@ export function DataTable<TData, TValue>({
             <div className="flex items-center space-x-2">
               <Button
                 variant="outline"
-                className="hidden h-8 w-8 p-0 lg:flex"
+                className="hidden h-8 w-8 p-0 sm:flex"
                 onClick={() => handlePageChange(() => table.setPageIndex(0))}
                 disabled={!table.getCanPreviousPage()}
               >
@@ -261,7 +263,7 @@ export function DataTable<TData, TValue>({
               </Button>
               <Button
                 variant="outline"
-                className="hidden h-8 w-8 p-0 lg:flex"
+                className="hidden h-8 w-8 p-0 sm:flex"
                 onClick={() => handlePageChange(() => table.setPageIndex(table.getPageCount() - 1))}
                 disabled={!table.getCanNextPage()}
               >

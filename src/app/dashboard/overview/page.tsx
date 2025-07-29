@@ -856,8 +856,8 @@ Status Filter: ${statusFilter}
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-3">
-        <div className="md:col-span-1 relative">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-3">
+        <div className="lg:col-span-1 relative">
           {isRealTimeEnabled && (
             <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
               <div className="h-1.5 w-1.5 bg-green-500 rounded-full animate-pulse"></div>
@@ -874,7 +874,7 @@ Status Filter: ${statusFilter}
             />
           </div>
         </div>
-        <div className="md:col-span-2 relative">
+        <div className="lg:col-span-2 relative">
           {isRealTimeEnabled && (
             <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs z-10">
               <div className="h-1.5 w-1.5 bg-green-500 rounded-full animate-pulse"></div>
