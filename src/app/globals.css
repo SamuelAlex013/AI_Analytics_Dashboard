@@ -135,3 +135,36 @@
   animation: marquee 20s linear infinite;
 }
 
+/* Dashboard Controls Improvements */
+@media (max-width: 640px) {
+  .dashboard-controls {
+    @apply gap-1;
+  }
+  
+  .dashboard-control-btn {
+    @apply min-w-[32px] h-8 px-2;
+  }
+}
+
+@media (min-width: 641px) {
+  .dashboard-controls {
+    @apply gap-2;
+  }
+  
+  .dashboard-control-btn {
+    @apply min-w-[36px] h-9 px-3;
+  }
+}
+
+/* Ensure button text doesn't overflow */
+.btn-text-responsive {
+  @apply whitespace-nowrap overflow-hidden text-ellipsis;
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
+

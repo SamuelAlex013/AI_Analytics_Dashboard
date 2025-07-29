@@ -467,18 +467,21 @@ Status Filter: ${statusFilter}
           </div>
 
           {/* Enhanced Control Panel */}
-          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            {/* Primary Controls */}
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end order-2 sm:order-1">
             {/* Notification Bell */}
             <div className="relative">
               <Button
                 onClick={handleNotificationClick}
                 variant="ghost"
                 size="sm"
-                className="transition-all duration-200 hover:scale-105"
+                className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9 relative"
+                title="View notifications"
               >
-                <Bell className="h-3 w-3 sm:h-4 sm:w-4" />
+                <Bell className="h-4 w-4" />
                 {notificationCount > 0 && (
-                  <span className="absolute -top-1 -right-1 h-3 w-3 sm:h-4 sm:w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
                     {notificationCount}
                   </span>
                 )}
@@ -506,12 +509,13 @@ Status Filter: ${statusFilter}
             </div>
 
             {/* Auto Refresh Interval Selector */}
-            <div className="hidden sm:flex items-center gap-1">
-              <Zap className="h-3 w-3 text-muted-foreground" />
+            <div className="hidden lg:flex items-center gap-2">
+              <Zap className="h-4 w-4 text-muted-foreground" />
               <select
                 value={autoRefreshInterval}
                 onChange={(e) => changeRefreshInterval(e.target.value)}
-                className="text-xs border rounded px-1 sm:px-2 py-1 bg-background"
+                className="text-sm border rounded px-2 py-1 bg-background min-w-[60px] focus:ring-2 focus:ring-primary/20 transition-all"
+                title="Auto-refresh interval"
               >
                 <option value="5s">5s</option>
                 <option value="10s">10s</option>
@@ -521,15 +525,21 @@ Status Filter: ${statusFilter}
               </select>
             </div>
 
-            {/* Mobile-only Auto Refresh Button */}
-            <div className="sm:hidden">
+            {/* Mobile/Tablet Auto Refresh Button */}
+            <div className="lg:hidden">
               <Button
                 variant="ghost"
                 size="sm"
-                className="transition-all duration-200 hover:scale-105"
-                title={`Refresh rate: ${autoRefreshInterval}`}
+                className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
+                title={`Auto-refresh: ${autoRefreshInterval}`}
+                onClick={() => {
+                  const intervals = ["5s", "10s", "30s", "1m", "off"];
+                  const currentIndex = intervals.indexOf(autoRefreshInterval);
+                  const nextIndex = (currentIndex + 1) % intervals.length;
+                  changeRefreshInterval(intervals[nextIndex]);
+                }}
               >
-                <Zap className="h-3 w-3" />
+                <Zap className="h-4 w-4" />
               </Button>
             </div>
 
@@ -538,13 +548,13 @@ Status Filter: ${statusFilter}
               onClick={handleToggleVisibility}
               variant="ghost"
               size="sm"
-              className="transition-all duration-200 hover:scale-105"
+              className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
               title="Toggle dashboard visibility"
             >
               {isDashboardVisible ? (
-                <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
+                <Eye className="h-4 w-4" />
               ) : (
-                <EyeOff className="h-3 w-3 sm:h-4 sm:w-4" />
+                <EyeOff className="h-4 w-4" />
               )}
             </Button>
 
@@ -553,13 +563,13 @@ Status Filter: ${statusFilter}
               onClick={handleBookmark}
               variant="ghost"
               size="sm"
-              className="transition-all duration-200 hover:scale-105"
+              className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
               title="Bookmark dashboard"
             >
               {isBookmarked ? (
-                <BookmarkCheck className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500" />
+                <BookmarkCheck className="h-4 w-4 text-yellow-500" />
               ) : (
-                <Bookmark className="h-3 w-3 sm:h-4 sm:w-4" />
+                <Bookmark className="h-4 w-4" />
               )}
             </Button>
 
@@ -568,10 +578,10 @@ Status Filter: ${statusFilter}
               onClick={handleShare}
               variant="ghost"
               size="sm"
-              className="transition-all duration-200 hover:scale-105"
+              className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
               title="Share dashboard"
             >
-              <Share2 className="h-3 w-3 sm:h-4 sm:w-4" />
+              <Share2 className="h-4 w-4" />
             </Button>
 
             {/* Fullscreen Toggle - Hidden on mobile */}
@@ -579,7 +589,7 @@ Status Filter: ${statusFilter}
               onClick={handleFullscreen}
               variant="ghost"
               size="sm"
-              className="hidden sm:flex transition-all duration-200 hover:scale-105"
+              className="hidden sm:flex transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
               title="Toggle fullscreen"
             >
               {isFullscreen ? (
@@ -593,30 +603,31 @@ Status Filter: ${statusFilter}
             <Button
               variant="ghost"
               size="sm"
-              className="transition-all duration-200 hover:scale-105"
+              className="transition-all duration-200 hover:scale-105 h-8 sm:h-9 w-8 sm:w-9"
               title="Dashboard settings"
             >
-              <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
+              <Settings className="h-4 w-4" />
             </Button>
 
-            <Separator orientation="vertical" className="h-4 sm:h-6" />
+            <Separator orientation="vertical" className="h-6 mx-1" />
 
             {/* Real-time Toggle */}
             <Button
               onClick={() => setIsRealTimeEnabled(!isRealTimeEnabled)}
               variant={isRealTimeEnabled ? "default" : "outline"}
               size="sm"
-              className="transition-all duration-200 text-xs sm:text-sm"
+              className="transition-all duration-200 text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 font-medium"
+              title={isRealTimeEnabled ? `Disable live updates (${autoRefreshInterval})` : "Enable live updates"}
             >
               {isRealTimeEnabled ? (
                 <>
-                  <Pause className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <Pause className="h-4 w-4 sm:mr-2 flex-shrink-0" />
                   <span className="hidden sm:inline">Live ({autoRefreshInterval})</span>
                   <span className="sm:hidden">Live</span>
                 </>
               ) : (
                 <>
-                  <Play className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                  <Play className="h-4 w-4 sm:mr-2 flex-shrink-0" />
                   <span className="hidden sm:inline">Enable Live</span>
                   <span className="sm:hidden">Live</span>
                 </>
@@ -624,10 +635,17 @@ Status Filter: ${statusFilter}
             </Button>
 
             {/* Manual Refresh */}
-            <Button onClick={refetch} variant="outline" size="sm" className="text-xs sm:text-sm">
-              <RefreshCw className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+            <Button 
+              onClick={refetch} 
+              variant="outline" 
+              size="sm" 
+              className="text-xs sm:text-sm h-8 sm:h-9 px-2 sm:px-3 transition-all duration-200 hover:scale-105 font-medium"
+              title="Refresh dashboard data"
+            >
+              <RefreshCw className="h-4 w-4 sm:mr-2 flex-shrink-0" />
               <span className="hidden sm:inline">Refresh</span>
             </Button>
+            </div>
           </div>
         </div>
 
