@@ -440,10 +440,10 @@ Status Filter: ${statusFilter}
   if (!data) return null
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6 w-full">
       {/* Enhanced Header with Real-time Controls */}
-      <div className="flex flex-col space-y-4">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+      <div className="flex flex-col space-y-3 sm:space-y-4">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-4">
             <div className="flex-1">
               <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">

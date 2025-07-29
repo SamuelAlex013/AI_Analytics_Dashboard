@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
@@ -27,35 +27,35 @@ interface SidebarProps {
 }
 
 export function Sidebar({ className }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true) // Start collapsed by default
   const pathname = usePathname()
 
   return (
     <aside className={cn(
       "flex flex-col h-full bg-card border-r border-border transition-all duration-300",
-      isCollapsed ? "w-12 sm:w-16" : "w-48 sm:w-64",
+      isCollapsed ? "w-12 lg:w-14" : "w-48 lg:w-56",
       className
     )}>
       {/* Header */}
-      <div className="flex items-center justify-between p-2 sm:p-4 border-b border-border">
+      <div className="flex items-center justify-between p-1 sm:p-2 border-b border-border">
         {!isCollapsed && (
-          <h2 className="text-sm sm:text-lg font-semibold text-foreground truncate">
-            <span className="hidden sm:inline">ADmyBRAND Insights</span>
-            <span className="sm:hidden">ADmyBRAND</span>
+          <h2 className="text-xs sm:text-sm font-semibold text-foreground truncate">
+            ADmyBRAND
           </h2>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="ml-auto h-6 w-6 sm:h-8 sm:w-8"
+          className="ml-auto h-6 w-6 sm:h-7 sm:w-7 shrink-0"
+          title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {isCollapsed ? <Menu className="h-3 w-3 sm:h-4 sm:w-4" /> : <X className="h-3 w-3 sm:h-4 sm:w-4" />}
         </Button>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-2 sm:p-4 space-y-1 sm:space-y-2">
+      <nav className="flex-1 p-1 sm:p-2 space-y-1">
         {NAVIGATION_ITEMS.map((item) => {
           const Icon = iconMap[item.icon as keyof typeof iconMap]
           const isActive = pathname === item.href
@@ -65,15 +65,15 @@ export function Sidebar({ className }: SidebarProps) {
               <Button
                 variant={isActive ? "secondary" : "ghost"}
                 className={cn(
-                  "w-full justify-start transition-all duration-200 text-xs sm:text-sm h-8 sm:h-10",
-                  isCollapsed ? "px-1 sm:px-2" : "px-2 sm:px-4",
+                  "w-full transition-all duration-200 text-xs h-8 sm:h-9",
+                  isCollapsed ? "px-0 justify-center" : "px-2 sm:px-3 justify-start",
                   isActive && "bg-secondary text-secondary-foreground"
                 )}
+                title={isCollapsed ? item.title : undefined}
               >
-                {/* Only hide navigation icons on mobile, not all icons */}
-                <Icon className="h-3 w-3 sm:h-4 sm:w-4 shrink-0 hidden sm:inline-flex" />
+                <Icon className="h-4 w-4 shrink-0" />
                 {!isCollapsed && (
-                  <span className={cn("ml-0 sm:ml-3 truncate")}>{item.title}</span>
+                  <span className="ml-2 truncate text-xs sm:text-sm">{item.title}</span>
                 )}
               </Button>
             </Link>
@@ -82,11 +82,10 @@ export function Sidebar({ className }: SidebarProps) {
       </nav>
 
       {/* Footer */}
-      <div className="p-2 sm:p-4 border-t border-border">
+      <div className="p-1 sm:p-2 border-t border-border">
         {!isCollapsed && (
-          <div className="text-xs text-muted-foreground">
-            <span className="hidden sm:inline">Built for you</span>
-            <span className="sm:hidden">Built</span>
+          <div className="text-xs text-muted-foreground text-center">
+            <span>ADmyBRAND</span>
           </div>
         )}
       </div>
